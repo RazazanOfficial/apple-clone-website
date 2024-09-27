@@ -8,15 +8,17 @@ import Navbar from './components/Navbar';
 
 const App = () => {
   return (
-    <main>
+    <>
       <Navbar />
-      <Hero />
-      <HighLights />
-      <Model />
-      <Featrues />
-      <HowItWork />
+      <main>
+        <Hero />
+        <HighLights />
+        <Model />
+        <Featrues />
+        <HowItWork />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };
 

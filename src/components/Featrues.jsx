@@ -1,11 +1,15 @@
+import gsap from 'gsap';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
-import React, { useRef } from 'react';
+
 import { animateWithGsap } from '../utils/animations';
 import { explore1Img, explore2Img, exploreVideo } from '../utils';
-import gsap from 'gsap';
 
 const Featrues = () => {
+  //=-=-=||useRef||=-=-=//
   const videoRef = useRef();
+
+  //=-=-=||useGsap||=-=-=//
   useGSAP(() => {
     gsap.to('#exploreVideo', {
       scrollTrigger: {
@@ -30,6 +34,7 @@ const Featrues = () => {
       duration: 1,
     });
   }, []);
+
   return (
     <section className="h-full common-padding bg-zinc relative overflow-hidden">
       <div className="screen-max-wdith">
@@ -40,7 +45,7 @@ const Featrues = () => {
         </div>
 
         <div className="flex flex-col justify-center items-center overflow-hidden">
-          <div className="mt-32 mb-24 pl-24">
+          <div className="mt-32 mb-24 pl-5 md:pl-24">
             <h2 className="text-5xl lg:text-7xl font-semibold">iPhone.</h2>
             <h2 className="text-5xl lg:text-7xl font-semibold">
               Forged in titanium.

@@ -1,27 +1,30 @@
 import * as THREE from 'three';
-import React, { useEffect, useRef } from "react";
-import { useGLTF, useTexture } from "@react-three/drei";
+import { useEffect } from 'react';
+import { useGLTF, useTexture } from '@react-three/drei';
 
 function Model(props) {
-  const { nodes, materials } = useGLTF("/models/scene.glb");
-
+  //=-=-=||useGLTF||=-=-=//
+  const { nodes, materials } = useGLTF('/models/scene.glb');
+  
+  //=-=-=||useTexture||=-=-=//
   const texture = useTexture(props.item.img);
 
-    useEffect(() => {
-      Object.entries(materials).map((material) => {
-        if (
-          material[0] !== "zFdeDaGNRwzccye" &&
-          material[0] !== "ujsvqBWRMnqdwPx" &&
-          material[0] !== "hUlRcbieVuIiOXG" &&
-          material[0] !== "jlzuBkUzuJqgiAK" &&
-          material[0] !== "xNrofRCqOXXHVZt"
-        ) {
-          material[1].color = new THREE.Color(props.item.color[0]);
-        }
-        material[1].needsUpdate = true;
-      });
-    }, [materials, props.item]);
-  
+  //=-=-=||useEffect||=-=-=//
+  useEffect(() => {
+    Object.entries(materials).map((material) => {
+      if (
+        material[0] !== 'zFdeDaGNRwzccye' &&
+        material[0] !== 'ujsvqBWRMnqdwPx' &&
+        material[0] !== 'hUlRcbieVuIiOXG' &&
+        material[0] !== 'jlzuBkUzuJqgiAK' &&
+        material[0] !== 'xNrofRCqOXXHVZt'
+      ) {
+        material[1].color = new THREE.Color(props.item.color[0]);
+      }
+      material[1].needsUpdate = true;
+    });
+  }, [materials, props.item]);
+
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -249,4 +252,4 @@ function Model(props) {
 
 export default Model;
 
-useGLTF.preload("/models/scene.glb");
+useGLTF.preload('/models/scene.glb');

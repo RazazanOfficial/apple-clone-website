@@ -1,19 +1,27 @@
-import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import React, { useEffect, useState } from 'react';
+import { useGSAP } from '@gsap/react';
+import { useEffect, useState } from 'react';
+
 import { heroVideo, smallHeroVideo } from '../utils';
 
 const Hero = () => {
+  //=-=-=||gsap||=-=-=//
+  useGSAP(() => {
+    gsap.to('#hero', {
+      opacity: 1,
+      delay: 1.5,
+    });
+    gsap.to('#cta', {
+      opacity: 1,
+      delay: 1.85,
+      y: -25,
+    });
+  }, []);
+
   //=-=-=||useStates||=-=-=//
   const [videoSrc, setVideoSrc] = useState(
     window.innerWidth < 760 ? smallHeroVideo : heroVideo
   );
-
-  //=-=-=||handels||=-=-=//
-  const handleVideoSrcSet = () => {
-    if (window.innerWidth < 760) setVideoSrc(smallHeroVideo);
-    else setVideoSrc(heroVideo);
-  };
 
   //=-=-=||useEffect||=-=-=//
   useEffect(() => {
@@ -21,18 +29,11 @@ const Hero = () => {
     return () => removeEventListener('resize', handleVideoSrcSet);
   }, []);
 
-  //=-=-=||gsap||=-=-=//
-  useGSAP(() => {
-    gsap.to('#hero', {
-      opacity: 1,
-      delay: 1.5,
-    });
-    gsap.to('#cta',{
-      opacity: 1,
-      delay:1.85,
-      y: -25
-    })
-  }, []);
+  //=-=-=||handels||=-=-=//
+  const handleVideoSrcSet = () => {
+    if (window.innerWidth < 760) setVideoSrc(smallHeroVideo);
+    else setVideoSrc(heroVideo);
+  };
 
   return (
     <section className="w-full nav-height bg-black relative">
@@ -51,9 +52,14 @@ const Hero = () => {
             <source src={videoSrc} />
           </video>
         </div>
-        <div id='cta' className='flex flex-col items-center opacity-0 translate-y-20'>
-          <a href="#highlights" className='btn'>Buy</a>
-          <p className='font-normal text-xl'>From $199/ month or 999$</p>
+        <div
+          id="cta"
+          className="flex flex-col items-center opacity-0 translate-y-20"
+        >
+          <a href="#highlights" className="btn">
+            Buy
+          </a>
+          <p className="font-normal text-xl">From $199/ month or 999$</p>
         </div>
       </div>
     </section>

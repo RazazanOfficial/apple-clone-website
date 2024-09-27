@@ -1,34 +1,39 @@
-import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import ModelView from './ModelView';
-import { useEffect, useRef, useState } from 'react';
-import { yellowImg } from '../utils';
-
 import * as THREE from 'three';
-import { Canvas } from '@react-three/fiber';
+import ModelView from './ModelView';
+import { useGSAP } from '@gsap/react';
 import { View } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { useEffect, useRef, useState } from 'react';
+
+import { yellowImg } from '../utils';
 import { models, sizes } from '../constants';
 import { animateWithGsapTimeline } from '../utils/animations';
 
 const Model = () => {
+  //=-=-=||useState||=-=-=//
   const [size, setSize] = useState('small');
   const [model, setModel] = useState({
     title: 'iPhone 15 Pro in Natural Titanium',
     color: ['#8F8A81', '#FFE7B9', '#6F6C64'],
     img: yellowImg,
   });
-
-  const cameraControlSmall = useRef();
-  const cameraControlLarge = useRef();
-
-  const small = useRef(new THREE.Group());
-  const large = useRef(new THREE.Group());
-
   const [smallRotation, setSmallRotation] = useState(0);
   const [largeRotation, setLargeRotation] = useState(0);
 
+  //=-=-=||useRef||=-=-=//
+  const cameraControlSmall = useRef();
+  const cameraControlLarge = useRef();
+  const small = useRef(new THREE.Group());
+  const large = useRef(new THREE.Group());
+
+  //=-=-=||useGsap||=-=-=//
+  useGSAP(() => {
+    gsap.to('#heading', { y: 0, opacity: 1 });
+  }, []);
   const tl = gsap.timeline();
 
+  //=-=-=||useEffect||=-=-=//
   useEffect(() => {
     if (size === 'large') {
       animateWithGsapTimeline(tl, small, smallRotation, '#view1', '#view2', {
@@ -44,10 +49,6 @@ const Model = () => {
       });
     }
   }, [size]);
-
-  useGSAP(() => {
-    gsap.to('#heading', { y: 0, opacity: 1 });
-  }, []);
 
   return (
     <section className="common-padding">

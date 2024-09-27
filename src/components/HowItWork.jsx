@@ -1,11 +1,15 @@
-import React, { useRef } from 'react';
-import { chipImg, frameImg, frameVideo } from '../utils';
-import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+
 import { animateWithGsap } from '../utils/animations';
+import { chipImg, frameImg, frameVideo } from '../utils';
 
 const HowItWork = () => {
+  //=-=-=||useRef||=-=-=//
   const videoRef = useRef();
+
+  //=-=-=||useGsap||=-=-=//
   useGSAP(() => {
     gsap.from('#chip', {
       scrollTrigger: { trigger: '#chip', start: '20% bottom' },
@@ -21,6 +25,7 @@ const HowItWork = () => {
       ease: 'power2.inOut',
     });
   }, []);
+
   return (
     <section className="common-padding">
       <div className="screen-max-width">
