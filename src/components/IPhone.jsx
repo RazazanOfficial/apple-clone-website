@@ -4,8 +4,9 @@ import { useGLTF, useTexture } from '@react-three/drei';
 
 function Model(props) {
   //=-=-=||useGLTF||=-=-=//
-  const { nodes, materials } = useGLTF('/models/scene.glb');
-  
+  // const { nodes, materials } = useGLTF('/models/scene.glb');
+  const { nodes, materials } = useGLTF(`${import.meta.env.BASE_URL}models/scene.glb`);
+
   //=-=-=||useTexture||=-=-=//
   const texture = useTexture(props.item.img);
 
@@ -252,4 +253,6 @@ function Model(props) {
 
 export default Model;
 
-useGLTF.preload('/models/scene.glb');
+// useGLTF.preload('/models/scene.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}models/scene.glb`);
+
